@@ -155,7 +155,3 @@ jupyter notebook weather_classification.ipynb
 ## 👤 Author
 
 **Harijith M. M**
-
----
-
-## ⭐ If you found this useful, consider giving a star!
