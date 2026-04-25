@@ -1,14 +1,13 @@
 # 🌦️ Weather Classification using Machine Learning
 
-## 📌 Overview
+## 📌 Problem Statement
+Accurately classifying weather conditions based on environmental parameters is important for applications like climate monitoring, agriculture planning, and forecasting systems.
 
-This project focuses on building a **multi-class classification system** to predict weather conditions based on atmospheric features. The pipeline includes **data cleaning, exploratory data analysis (EDA), preprocessing, model training, hyperparameter tuning, and evaluation**.
-
-The objective is to compare multiple machine learning algorithms and select the best-performing model based on **accuracy and F1-score**.
+This project builds a **multi-class classification model** to predict weather types using structured meteorological data.
 
 ---
 
-## 📂 Dataset
+## 📊 Dataset Overview
 
 Dataset: weather_classification_data.csv
 
@@ -16,139 +15,146 @@ Source: Kaggle
 
 Dataset Link: https://www.kaggle.com/datasets/nikhil7280/weather-type-classification/data
 
-* Contains meteorological features such as:
+The dataset contains both numerical and categorical features:
 
-  * Temperature
-  * Humidity
-  * Wind Speed
-  * Precipitation
-  * Atmospheric Pressure
-  * UV Index
-  * Visibility
+**Numerical Features:**
+- Temperature  
+- Humidity  
+- Wind Speed  
+- Precipitation  
+- Atmospheric Pressure  
+- UV Index  
+- Visibility (km)  
 
-* **Target Variable:**
+**Categorical Features:**
+- Cloud Cover  
+- Season  
+- Location  
 
-  * `weather_type` (categorical)
+**Target Variable:**
+- Weather Type (multi-class)
 
 ---
 
-## ⚙️ Project Workflow
+## 🔍 Exploratory Data Analysis (EDA)
 
-### 1. Data Inspection
+Key observations:
 
-* Checked dataset shape, structure, and data types
-* Identified missing and duplicate values
-* Analyzed class distribution
+- Target classes are reasonably balanced  
+- Significant variation observed in:
+  - Temperature
+  - Visibility
+  - Atmospheric Pressure  
+- Correlation heatmap revealed moderate relationships between some features  
+- Outliers detected in:
+  - Wind Speed  
+  - Atmospheric Pressure  
+  - Visibility  
 
-### 2. Data Cleaning
+### ✔ Action Taken:
+- Applied **IQR-based outlier capping** instead of removal to retain data integrity  
 
-* Standardized column names (lowercase, removed special characters)
-* Cleaned categorical values (trim + lowercase)
-* Renamed inconsistent columns
+---
 
-### 3. Exploratory Data Analysis (EDA)
+## ⚙️ Data Preprocessing
 
-* Target class distribution visualization
-* Feature distribution using histograms
-* Boxplots to analyze feature vs target relationships
-* Correlation heatmap for numerical features
-* Categorical vs target analysis
-* Outlier detection using **Z-score**
+- Standardized column names and categorical values  
+- Applied **One-Hot Encoding** for categorical variables  
+- Used different preprocessing strategies:
+  - **StandardScaler** for distance-based models (KNN, SVM, Logistic Regression)  
+  - No scaling for tree-based models (Decision Tree, Random Forest, XGBoost)  
 
-### 4. Data Preprocessing
+✔ Implemented preprocessing pipelines using `ColumnTransformer` to avoid data leakage  
 
-* Outlier handling using **IQR capping**
-* Feature encoding:
+---
 
-  * Label Encoding (target)
-  * OneHot Encoding (categorical features)
-* Feature scaling using **StandardScaler**
-* Train-test split (80-20) with stratification
+## 🧠 Feature Engineering Strategy
+
+- Retained all features after validating importance through EDA  
+- Avoided unnecessary feature removal to preserve information  
+- Used **Stratified Train-Test Split** to maintain class balance  
 
 ---
 
 ## 🤖 Models Implemented
 
-The following models were trained and evaluated:
-
-* Logistic Regression
-* K-Nearest Neighbors (KNN)
-* Support Vector Machine (SVM)
-* Decision Tree
-* Random Forest
-* XGBoost
-
-Each model is implemented using a **Pipeline**, ensuring:
-
-* Consistent preprocessing
-* No data leakage
+- Logistic Regression  
+- K-Nearest Neighbors (KNN)  
+- Support Vector Machine (SVM)  
+- Decision Tree  
+- Random Forest  
+- XGBoost  
 
 ---
 
-## 🔍 Hyperparameter Tuning
+## 🔧 Hyperparameter Tuning
 
-* Used **GridSearchCV** with:
-
-  * Stratified K-Fold Cross Validation (k=5)
-* Optimized key parameters for each model
-
----
-
-## 📊 Evaluation Metrics
-
-* Accuracy
-* F1 Score
-* Confusion Matrix
+- Used **GridSearchCV** with **Stratified K-Fold (5 folds)**  
+- Optimized based on:
+  - Accuracy  
+  - Weighted F1 Score  
 
 ---
 
-## 📈 Results
+## 📈 Model Performance
 
-* Compared all models using:
-
-  * Bar plots (Accuracy vs F1 Score)
-  * Line plots for performance trends
-* Selected the **best model based on F1 Score**
-
----
-
-## 🛠️ Technologies Used
-
-* Python
-* Pandas, NumPy
-* Matplotlib, Seaborn
-* Scikit-learn
-* XGBoost
+| Model               | Accuracy | F1 Score |
+|--------------------|---------|---------|
+| Logistic Regression | 0.87 | 0.87 |
+| KNN                | 0.89 | 0.89 |
+| SVM                | 0.90 | 0.90 |
+| Decision Tree      | 0.90 | 0.90 |
+| Random Forest      | 0.91 | 0.91 |
+| **XGBoost**        | **0.91** | **0.91** |
 
 ---
 
-## 🚀 Installation
+## 🏆 Best Model: XGBoost
 
-```bash
-git clone https://github.com/Hari-jith/Weather-Classification.git
-cd Weather-Classification
-pip install -r requirements.txt
-```
+- Accuracy: **91.47%**  
+- F1 Score: **0.9149**  
 
----
-
-## ▶️ Usage
-
-Run the notebook:
-
-```bash
-jupyter notebook weather_classification.ipynb
-```
+### ✔ Why XGBoost performed best:
+- Captures non-linear relationships effectively  
+- Robust to outliers and feature interactions  
+- Works well with mixed feature types  
 
 ---
 
-## 📌 Key Highlights
+## 📊 Model Evaluation
 
-* End-to-end ML pipeline
-* Proper use of **Pipeline + GridSearchCV**
-* Handles both numerical and categorical data
-* Prevents data leakage
-* Model comparison with clear visualization
+- Evaluated using:
+  - Accuracy  
+  - Weighted F1 Score  
+  - Confusion Matrix  
+
+✔ Achieved strong class-wise prediction performance with minimal misclassification  
+
+---
+
+## 🚀 Key Takeaways
+
+- Proper preprocessing and pipeline design improved model performance significantly  
+- Tree-based models outperformed linear models due to non-linear patterns in data  
+- Outlier handling via capping preserved useful data while reducing noise  
+
+---
+
+## 🛠️ Tech Stack
+
+- Python  
+- Pandas, NumPy  
+- Scikit-learn  
+- XGBoost  
+- Matplotlib, Seaborn  
+
+---
+
+## 📌 Future Improvements
+
+- Feature importance analysis (XGBoost / SHAP)  
+- Model deployment using Flask or FastAPI  
+- Real-time weather classification system  
 
 ---
 
