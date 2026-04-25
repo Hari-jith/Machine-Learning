@@ -125,8 +125,8 @@ Each model is implemented using a **Pipeline**, ensuring:
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/your-username/weather-classification.git
-cd weather-classification
+git clone https://github.com/Hari-jith/Weather-Classification.git
+cd Weather-Classification
 pip install -r requirements.txt
 ```
 
