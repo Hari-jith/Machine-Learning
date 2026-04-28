@@ -1,116 +1,174 @@
-# 🚖 Uber Ride Price Prediction
+# 🚖 Uber Fare Prediction using Advanced Machine Learning
 
-## 📌 Project Overview
-This project focuses on predicting Uber ride fares using machine learning techniques. The model is trained on trip-level data including pickup and dropoff coordinates, timestamps, and passenger information to estimate fare prices accurately.
+## 📌 Overview
 
-The objective is to build a robust regression model that captures the underlying patterns in ride pricing and improves prediction accuracy through effective data preprocessing and feature engineering.
+This project aims to predict Uber ride fares using historical trip data by leveraging advanced feature engineering, spatial analysis, and ensemble learning techniques. The model captures complex non-linear relationships between trip characteristics and pricing, achieving high predictive performance.
 
 ---
 
 ## 📊 Dataset
-- **Source:** Kaggle  
-- **Dataset Name:** Uber Ride Price Prediction  
-- **Link:** https://www.kaggle.com/datasets/kushsheth/uber-ride-price-prediction/data  
 
-### 🧾 Features in Dataset:
-- `pickup_datetime` – Timestamp of ride start  
-- `pickup_latitude`, `pickup_longitude` – Pickup location  
-- `dropoff_latitude`, `dropoff_longitude` – Dropoff location  
-- `passenger_count` – Number of passengers  
-- `fare_amount` – Target variable (ride cost)  
+* Source: Uber Fare Dataset (Kaggle)
+* Link: https://www.kaggle.com/datasets/kushsheth/uber-ride-price-prediction/data 
+* Total Records: ~200,000
+* Features:
 
----
-
-## 🧹 Data Preprocessing
-
-The dataset contains noise and inconsistencies typical of real-world data. The following preprocessing steps were applied:
-
-- Removed missing/null values  
-- Filtered out invalid fares (≤ 0)  
-- Removed unrealistic passenger counts  
-- Eliminated incorrect geographic coordinates  
-- Removed extreme outliers to stabilize model training  
+  * Pickup & dropoff coordinates (latitude, longitude)
+  * Pickup timestamp
+  * Passenger count
+  * Fare amount (target variable)
 
 ---
 
-## ⚙️ Feature Engineering
+## ⚙️ Data Preprocessing
 
-To improve model performance, several new features were derived:
-
-### ⏱ Time-Based Features
-- Hour of the day  
-- Day of the week  
-- Month and year  
-- Weekend indicator  
-
-### 📍 Spatial Features
-- Distance between pickup and dropoff locations (Haversine distance)
-
-### 🚦 Contextual Features
-- Rush hour indicator  
-
-These features help the model capture temporal and spatial dependencies in pricing.
+* Removed missing and duplicate entries
+* Filtered invalid fare values (≤ 0)
+* Eliminated erroneous geographic coordinates (0 values and out-of-bound ranges)
+* Restricted passenger count to realistic limits (1–6)
+* Converted timestamp to datetime format
+* Removed extreme outliers using 99th percentile filtering on distance
 
 ---
 
-## 📈 Exploratory Data Analysis (EDA)
+## 🧠 Feature Engineering
 
-Key insights derived through EDA:
+### ⏱️ Temporal Features
 
-- Fare distribution is **right-skewed**, requiring transformation  
-- Strong relationship between **distance and fare**  
-- Peak-hour rides tend to have higher fares  
-- Presence of significant outliers in fare values  
+* Hour of day
+* Day of week
+* Month, Year
+* Weekend indicator
+* Peak hour indicator (7–10 AM, 4–8 PM)
+* Night ride indicator (midnight–4 AM)
 
-Visualizations used:
-- Distribution plots  
-- Scatter plots (Distance vs Fare)  
-- Box plots (Time vs Fare)  
-- Correlation heatmap  
+### 🌍 Spatial Features
+
+* **Haversine distance** (actual geographic distance)
+* **Manhattan distance** (grid-based urban distance approximation)
+
+### 📍 Location Intelligence
+
+* Applied **K-Means clustering** on:
+
+  * Pickup coordinates
+  * Dropoff coordinates
+* Captures location-based pricing zones
+
+### 🔗 Feature Interactions
+
+* Distance × Hour interaction to model time-dependent fare variation
+
+### 🎯 Target Transformation
+
+* Applied **log transformation** to reduce skewness and stabilize variance
 
 ---
 
 ## 🤖 Models Implemented
 
-The following regression models were trained and evaluated:
+* Linear Regression
+* Ridge Regression
+* Lasso Regression
+* XGBoost Regressor (final model)
 
-- **Linear Regression**  
-- **Ridge Regression**  
-- **Lasso Regression**  
-- **XGBoost Regressor**  
+---
+
+## 🔍 Model Performance
+
+| Model             | Test R²    | Test RMSE  | Test MAE   |
+| ----------------- | ---------- | ---------- | ---------- |
+| Linear Regression | 0.7018     | 0.2723     | 0.1951     |
+| Ridge Regression  | 0.7018     | 0.2723     | 0.1951     |
+| Lasso Regression  | 0.6973     | 0.2743     | 0.1983     |
+| XGBoost (Tuned)   | **0.8007** | **0.2226** | **0.1458** |
+
+### 📈 Cross-Validation
+
+* Best CV R²: **0.8030**
+* Confirms strong generalization ability
 
 ---
 
 ## ⚙️ Hyperparameter Tuning
 
-To optimize model performance, hyperparameter tuning was performed.
+Optimized using **RandomizedSearchCV**:
 
-- Techniques used:
-  - Randomized Search
-- Parameters tuned (for XGBoost):
-  - `n_estimators`
-  - `learning_rate`
-  - `max_depth`
-  - `subsample`
-  - `colsample_bytree`
-
-The tuned model did not show significant diffference with the base model
+* n_estimators = 800
+* max_depth = 7
+* learning_rate = 0.1
+* subsample = 1.0
+* colsample_bytree = 0.8
+* reg_alpha = 1
+* reg_lambda = 1
 
 ---
 
-## 📊 Model Evaluation
+## 📊 Model Interpretation
 
-Models were evaluated using:
+### 🔹 Feature Importance (XGBoost)
 
-- **RMSE (Root Mean Squared Error)** – Measures prediction error  
-- **R² Score** – Measures explained variance  
+Top contributors:
+
+1. Distance (Haversine)
+2. Manhattan distance
+3. Distance-hour interaction
+4. Hour of day
+5. Month & day patterns
+
+### 🔹 SHAP Analysis
+
+* **Distance features dominate pricing**
+* Longer trips → strong positive contribution to fare
+* Time-based effects (hour, peak) influence pricing moderately
+* Location clusters capture zone-based fare variations
+* Passenger count has minimal impact
 
 ---
 
-## 🏆 Results
+## 🧪 Evaluation Metrics
 
-- Linear models provided baseline performance but struggled with non-linear relationships  
-- Regularization (Ridge/Lasso) improved generalization slightly  
-- **XGBoost achieved the best performance**, effectively capturing complex patterns  
+* Root Mean Squared Error (RMSE)
+* Mean Absolute Error (MAE)
+* R² Score
+* Cross-validation R²
+
+---
+
+## 📉 Residual Analysis
+
+* Residuals approximately normally distributed
+* No strong bias patterns observed
+* Indicates good model fit and error balance
+
+---
+
+## 🛠️ Tech Stack
+
+* Python
+* Pandas, NumPy
+* Scikit-learn
+* XGBoost
+* SHAP (Explainability)
+* Matplotlib, Seaborn
+
+---
+
+## 🚀 Key Insights
+
+* Uber fare pricing is highly **non-linear**
+* Distance is the dominant factor but not sufficient alone
+* Temporal and spatial features significantly improve predictions
+* Tree-based ensemble models outperform linear models by a large margin
+* Feature interactions play a critical role in capturing real-world pricing behavior
+
+---
+
+## 📎 Conclusion
+
+This project demonstrates a complete machine learning pipeline, including data cleaning, advanced feature engineering, model optimization, and interpretability. The final model achieves strong predictive performance with an R² of **0.80**, making it a robust solution for fare estimation tasks.
+
+---
+
 
 > 📌 *Final performance metrics can be found in the notebook.*
