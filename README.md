@@ -1,5 +1,6 @@
-🤖 Machine Learning Projects Portfolio
-📌 Overview
+🤖 *Machine Learning Projects Portfolio
+
+📌 **Overview
 
 This repository is a curated collection of machine learning and deep learning projects covering a wide range of real-world applications including regression, classification, computer vision, and generative models.
 
@@ -8,6 +9,7 @@ The goal of this repository is to demonstrate practical implementation of machin
 ---
 
 🚀 Key Highlights
+
 End-to-end ML pipelines (data → preprocessing → modeling → evaluation)
 Real-world datasets and problem statements
 Advanced feature engineering techniques
