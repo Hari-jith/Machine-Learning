@@ -1,6 +1,6 @@
-🤖 *Machine Learning Projects Portfolio
+# 🤖 Machine Learning Projects Portfolio
 
-📌 **Overview
+## 📌 **Overview
 
 This repository is a curated collection of machine learning and deep learning projects covering a wide range of real-world applications including regression, classification, computer vision, and generative models.
 
@@ -8,7 +8,7 @@ The goal of this repository is to demonstrate practical implementation of machin
 
 ---
 
-🚀 Key Highlights
+## 🚀 Key Highlights
 
 End-to-end ML pipelines (data → preprocessing → modeling → evaluation)
 Real-world datasets and problem statements
@@ -19,7 +19,8 @@ Clean and modular project structure
 
 ---
 
-⚙️ Tech Stack
+## ⚙️ Tech Stack
+
 Languages: Python
 Libraries:
 NumPy, Pandas
@@ -32,7 +33,8 @@ Tools: Jupyter Notebook, Google Colab, GitHub
 
 ---
 
-📊 Machine Learning Workflow
+## 📊 Machine Learning Workflow
+
 Data Collection
 Data Cleaning & Preprocessing
 Feature Engineering
