@@ -165,7 +165,7 @@ Displays correlations among all numerical variables.
 Countries showing the greatest increase in life expectancy over time.
 
 <p align="center">
-<img src="Images/Countries_With_Increase_Increase_in_Life_Expectancy.png" width="700">
+<img src="Images/Countries_With_Increase_Increase_In_Life_Expectancy.png" width="700">
 </p>
 
 ---
@@ -312,7 +312,7 @@ Linear Regression models the relationship between independent variables and life
 ### Actual vs Predicted
 
 <p align="center">
-<img src="Images/Linear-Regression-Model/LR_Actual_vs_Pred.png" width="650">
+<img src="Images/Linear-Regression-Model/LR_Actual_vs_Pred.png" width="250">
 </p>
 
 ---
@@ -369,7 +369,7 @@ Random Forest Regression builds multiple decision trees and combines their predi
 ### Actual vs Predicted
 
 <p align="center">
-<img src="Images/Random-Forest-Model/RF_Act_vs_Pred.png" width="650">
+<img src="Images/Random-Forest-Model/RF_Act_vs_Pred.png" width="250">
 </p>
 
 ---
@@ -402,7 +402,7 @@ Random Forest Regression builds multiple decision trees and combines their predi
 ### Feature Importance Plot
 
 <p align="center">
-<img src="Images/Random-Forest-Model/RF_Feature_Importance.png" width="750">
+<img src="Images/Random-Forest-Model/RF_Feature_Importance.png" width="250">
 </p>
 
 ---
