@@ -116,6 +116,8 @@ Top contributors:
 4. Hour of day
 5. Month & day patterns
 
+> ![Feature Importance](Images/feature_importance.png)
+
 ### 🔹 SHAP Analysis
 
 * **Distance features dominate pricing**
@@ -123,6 +125,8 @@ Top contributors:
 * Time-based effects (hour, peak) influence pricing moderately
 * Location clusters capture zone-based fare variations
 * Passenger count has minimal impact
+
+> ![SHAP Explainability](Images/shap_value.png)
 
 ---
 
