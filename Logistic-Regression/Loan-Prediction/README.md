@@ -52,10 +52,15 @@ The dataset contains financial and behavioral attributes of borrowers, including
 
 * Target distribution analysis
   > ![Target Distribution](Images/target_distribution.png)
+  
 * Feature distribution visualization
+  > ![Feature Distribution](Images/num_features_distribution.png)
+  
 * Correlation heatmap (numerical features)
   > ![Correlation Heatmap](Images/correlation_matrix.png)
+  
 * Identified skewness in financial variables
+  
 * Detected multicollinearity
 
 ---
