@@ -51,8 +51,10 @@ The dataset contains financial and behavioral attributes of borrowers, including
 ### 2. Exploratory Data Analysis (EDA)
 
 * Target distribution analysis
+  > ![Target Distribution](Images/target_distribution.png)
 * Feature distribution visualization
 * Correlation heatmap (numerical features)
+  > ![Correlation Heatmap](Images/correlation_matrix.png)
 * Identified skewness in financial variables
 * Detected multicollinearity
 
